@@ -1,0 +1,28 @@
+{
+  "name": "template",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Gubin"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "src/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.12.3",
+    "bootstrap": "^3.3.6"
+  },
+  "overrides" : {
+    "bootstrap" : {
+      "main": [
+        "less/bootstrap.less"
+      ]
+    }
+  }
+}
