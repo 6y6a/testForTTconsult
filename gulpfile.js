@@ -2,7 +2,7 @@
 
 var gulp           = require('gulp');
 var del            = require('del');
-var less           = require('gulp-less');
+var sass           = require('gulp-sass');
 var concat         = require('gulp-concat');
 var cleanCss       = require('gulp-clean-css');
 var imagemin       = require('gulp-imagemin');
@@ -10,33 +10,22 @@ var uglify         = require('gulp-uglify');
 var sourcemap      = require('gulp-sourcemaps');
 var autoprefixer   = require('gulp-autoprefixer');
 var browserSync    = require('browser-sync');
-var mainBowerFiles = require('main-bower-files');
 
-// Move changed less theme into libs
-gulp.task('make:bootstrap-theme', function(){
-    return gulp.src('src/less/bootstrap-theme/**/*.less')
-        .pipe(gulp.dest('src/libs/bootstrap/less'))
+
+// Make all needed scss -> css
+gulp.task('make:scss',  function(){
+    return gulp.src('src/scss/main.scss')
+      .pipe(sourcemap.init())
+      .pipe(sass().on('error', sass.logError))
+      .pipe(autoprefixer({browser: ['last 2 versions', 'ie11']}))
+      .pipe(sourcemap.write())
+      .pipe(gulp.dest('src/css'))
+      .pipe(browserSync.stream());
 });
 
-// Make all needed less -> css
-gulp.task('make:less', ['make:bootstrap-theme'], function(){
-    return gulp.src(Array.prototype.concat(mainBowerFiles('**/*.less'), ['src/less/**/main.less']))
-        .pipe(sourcemap.init())
-        .pipe(less())
-        .pipe(autoprefixer({browser: ['last 25 versions', 'ie9']}))
-        .pipe(sourcemap.write())
-        .pipe(gulp.dest('src/css'))
-        .pipe(browserSync.stream());
-});
-
-// Move all needed js to src/js
-gulp.task('make:js', function(){
-   return gulp.src(mainBowerFiles('**/*.js'))
-       .pipe(gulp.dest('src/js'));
-});
 
 // Start browserSync as a server
-gulp.task('server', ['make:less', 'make:js'], function(){
+gulp.task('server', ['make:scss'], function(){
 
     browserSync({
         server: {
@@ -45,7 +34,7 @@ gulp.task('server', ['make:less', 'make:js'], function(){
         browser: 'chrome'
     });
 
-    gulp.watch('src/less/**/*.less', ['make:less']);
+    gulp.watch('src/scss/main.scss', ['make:scss']);
     gulp.watch('src/*.html', browserSync.reload);
     gulp.watch('src/js/**/*.js', browserSync.reload);
 });
@@ -56,7 +45,7 @@ gulp.task('clean', function(){
 });
 
 // Make production version
-gulp.task('build', ['clean', 'make:less', 'make:js'], function(){
+gulp.task('build', ['clean', 'make:scss'], function(){
     var buildCss = gulp.src('src/css/**/*.css')
         .pipe(concat('style.css'))
         .pipe(cleanCss())
@@ -74,7 +63,7 @@ gulp.task('build', ['clean', 'make:less', 'make:js'], function(){
         .pipe(gulp.dest('dist/img'));
 
     var buildJS = gulp.src('src/js/**/*.js')
-        .pipe(concat('modules.min.js'))
+        .pipe(concat('scripts.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('dist/js'));
 
