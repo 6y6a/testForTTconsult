@@ -1,0 +1,8 @@
+// Базовые стили
+
+@import './src/scss/basic/variables.scss';
+@import './src/scss/basic/normalize.scss';
+@import './src/scss/basic/grid.scss';
+
+// БЭМ блоки
+@import './src/blocks/sprite-png/sprite-png.scss';
