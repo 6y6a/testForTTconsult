@@ -5,8 +5,8 @@
   "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/.bin/gulp",
-    "deploy": "cross-env NODE_ENV=production ./node_modules/.bin/gulp build && cross-env ./node_modules/.bin/gulp deploy"
+    "start": "gulp",
+    "production": "set NODE_ENV=production && gulp build && gulp deploy"
   },
   "author": "Gubin",
   "license": "ISC",
