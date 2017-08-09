@@ -34,5 +34,9 @@
     "gulp.spritesmith": "^6.5.1",
     "imagemin-pngquant": "^5.0.1",
     "mkdirp": "^0.5.1"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "jquery-placeholder": "^2.3.1"
   }
 }
