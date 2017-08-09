@@ -1,0 +1,45 @@
+@import '../../scss/basic/variables';
+
+
+.content {
+  text-align: center;
+
+
+  &__col {
+    margin-bottom: 25px;
+    vertical-align: top;
+    display: inline-block;
+    margin-left: 8px;
+    margin-right: 8px;
+    width: 90%;
+    min-width: 130px;
+    max-height: 210px;
+    overflow: auto;
+  }
+
+  &__text {
+    padding: 16px 16px;
+    font-size: 14px;
+    background: $color-bg-text;
+  }
+}
+
+
+
+@media screen and (min-width: 485px) {
+  .content__col {
+    width: 40%;
+  }
+}
+
+
+@media screen and (min-width: 769px) {
+  .content {
+    text-align: left;
+  }
+  
+  .content__col {
+    width: 21.875%;
+  }
+}
+

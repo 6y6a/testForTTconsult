@@ -5,4 +5,10 @@
 @import './src/scss/basic/grid.scss';
 
 // БЭМ блоки
-@import './src/blocks/sprite-png/sprite-png.scss';
+
+@import './src/blocks/page/page.scss';
+@import './src/blocks/sidebar/sidebar.scss';
+@import './src/blocks/main/main.scss';
+@import './src/blocks/menu/menu.scss';
+@import './src/blocks/content/content.scss';
+@import './src/blocks/pagination/pagination.scss';

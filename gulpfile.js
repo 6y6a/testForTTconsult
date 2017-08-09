@@ -45,7 +45,7 @@ gulp.task('make:scss', function () {
           }
       }))
       .pipe(postcss([
-          autoprefixer({browsers: ['last 2 version']})
+          autoprefixer({browsers: ['last 2 version', 'ie 9-11']})
       ]))
       .pipe(gulpIf(!isDev, cleanCss()))
       .pipe(rename('style.min.css'))
@@ -66,7 +66,7 @@ gulp.task('copy:css', function(callback) {
         console.log('---------- Копирование CSS');
         return gulp.src(blocks.additionalCss)
           .pipe(postcss([
-              autoprefixer({browsers: ['last 2 version']})
+              autoprefixer({browsers: ['last 2 version', 'ie 9-11']})
           ]))
           .pipe(cleanCss())
           .pipe(gulp.dest('./build/css'));
